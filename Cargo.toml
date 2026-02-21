@@ -2,6 +2,10 @@
 name = "uncollate"
 version = "0.1.0"
 edition = "2024"
+repository = "https://github.com/wdjcodes/uncollate"
+authors = ["wdjcodes"]
+description = "Uncollate array of structs into arrays of field"
+license = "MIT"
 
 [lib]
 proc-macro = true
