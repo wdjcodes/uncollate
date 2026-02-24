@@ -11,7 +11,8 @@ fn main(){
         Basic{ a: true, b: 12 },
         Basic{ a: false, b: 43 }
     ];
-    let bs: &[Basic] = &basics;
-    println!("{:?}", basics.uncoll_a());
-    println!("{:?}", bs.uncoll_b());
+    let uc = basics.uncollate();
+
+    println!("{:?}", uc.a());
+    println!("{:?}", uc.b());
 }

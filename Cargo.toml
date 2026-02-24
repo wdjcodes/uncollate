@@ -1,16 +1,24 @@
-[package]
-name = "uncollate"
-version = "0.1.0"
+[workspace]
+members = ["macro"]
+
+[workspace.package]
 edition = "2024"
+version = "0.1.0"
 repository = "https://github.com/wdjcodes/uncollate"
 authors = ["wdjcodes"]
-description = "Uncollate array of structs into arrays of field"
 license = "MIT"
 
+[package]
+name = "uncollate"
+description = "Uncollate array of structs into arrays of field"
+edition.workspace = true
+version.workspace = true
+repository.workspace = true
+authors.workspace = true
+license.workspace = true
+
 [lib]
-proc-macro = true
+path = "./src/lib.rs"
 
 [dependencies]
-proc-macro2 = "1.0.106"
-quote = "1.0.44"
-syn = "2.0.116"
+uncollate_macro = { path = "macro" }
