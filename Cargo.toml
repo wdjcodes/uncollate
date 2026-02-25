@@ -21,4 +21,4 @@ license.workspace = true
 path = "./src/lib.rs"
 
 [dependencies]
-uncollate_macro = { path = "macro" }
+uncollate_macro = { version = "0.2.0", path = "macro" }
