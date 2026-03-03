@@ -3,7 +3,7 @@ members = ["macro"]
 
 [workspace.package]
 edition = "2024"
-version = "0.2.1"
+version = "0.2.2"
 repository = "https://github.com/wdjcodes/uncollate"
 authors = ["wdjcodes"]
 license = "MIT"
@@ -21,4 +21,4 @@ license.workspace = true
 path = "./src/lib.rs"
 
 [dependencies]
-uncollate_macro = { version = "0.2.0", path = "macro" }
+uncollate_macro = { version = "0.2.1", path = "macro" }
