@@ -1,4 +1,61 @@
+
+
+/// This macro allows splitting a vector of structs into a struct of vectors over each field.
+/// This is accomplished in a few steps.
+/// 
+/// 1. Creates an `UncollatedT` type which has a field corresponding to each field of `T` with type
+///    `Vec<F>` and `F` is the type of field in `T`.
+/// 2. Impls `Collated` for type `T`. The `Collated` trait is used to add the fields of a single
+///    instance of `T` to corresponding vectors in a provided UncollatedT struct instance.
+/// 3. The `Uncollate` trait is then able to be used on any type that impls `IntoIter<Item = T>`
+///    which provides the `uncollate` method to get an `UncollatedT`
+/// 
+/// 
+///
+/// # Examples
+///
+/// ```
+/// # use uncollate::Uncollate;
+///
+/// #[derive(Uncollate)]
+/// struct Dog {
+///     name: String,
+///     breed: String
+/// }
+/// 
+/// let dogs = vec![
+///     Dog {name: "Bandit".to_string(), breed: "Beagle".to_string()}, 
+///     Dog {name: "Scout".to_string(), breed: "Pug".to_string()}
+/// ];
+/// 
+/// let uncol_dogs = dogs.uncollate();
+/// 
+/// assert_eq!(uncol_dogs.name, vec!["Bandit".to_string(), "Scout".to_string()]);
+/// assert_eq!(uncol_dogs.breed, vec!["Beagle".to_string(), "Pug".to_string()]);
+/// ```
+/// 
+/// /// ```
+/// # use uncollate::Uncollate;
+///
+/// #[derive(Uncollate)]
+/// struct Dog {
+///     name: String,
+///     breed: String
+/// }
+/// 
+/// let dogs = vec![
+///     Dog {name: "Bandit".to_string(), breed: "Beagle".to_string()}, 
+///     Dog {name: "Scout".to_string(), breed: "Pug".to_string()}
+/// ];
+/// 
+/// let mut uncol_dogs = dogs.uncollate();
+/// uncol_dogs.name_mut()[1] = "Grumpy".to_string;
+/// 
+/// assert_eq!(uncol_dogs.name, vec!["Bandit".to_string(), "Grumpy".to_string()]);
+/// assert_eq!(uncol_dogs.breed, vec!["Beagle".to_string(), "Pug".to_string()]);
+/// ```
 pub use uncollate_macro::Uncollate;
+
 pub trait Uncollate<T> {
     fn uncollate(self) -> T;
 }
@@ -53,6 +110,24 @@ macro_rules! uncollate {
     };
 }
 
+/// Uncollate an optional field be reference, and return an error if any is None
+/// 
+/// ```
+/// use uncollate::uncollate_req;
+/// 
+/// struct Greet {
+///     greeting: String,
+///     who: Option<String>,
+/// }
+/// 
+/// let greetings = vec![
+///     Greet { greeting: "Hello".into(), who: Some("world!".into()) },
+///     Greet { greeting: "Howdy".into(), who: None }
+/// ];
+/// 
+/// let whos = uncollate_req!(&greetings.who);
+/// assert_eq!(whos, Err("value must not be None"))
+/// ```
 #[macro_export]
 macro_rules! uncollate_req {
     (&$vec:ident.$field:ident) => {
