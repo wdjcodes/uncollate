@@ -1,4 +1,4 @@
-use uncollate::{Uncollate};
+use uncollate::Uncollate;
 
 #[derive(Uncollate)]
 pub struct Basic {
@@ -6,11 +6,8 @@ pub struct Basic {
     b: u64,
 }
 
-fn main(){
-    let basics = vec![
-        Basic{ a: true, b: 12 },
-        Basic{ a: false, b: 43 }
-    ];
+fn main() {
+    let basics = vec![Basic { a: true, b: 12 }, Basic { a: false, b: 43 }];
     let uc = basics.uncollate();
 
     println!("{:?}", uc.a());

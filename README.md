@@ -1,6 +1,8 @@
 # uncollate
 [![Static Badge](https://img.shields.io/badge/github-repo-blue?logo=github)
 ](https://github.com/wdjcodes/uncollate)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/wdjcodes/uncollate/ci.yml?logo=github)
+](https://github.com/wdjcodes/uncollate/actions)
 [![docs.rs](https://img.shields.io/docsrs/uncollate?logo=rust)
 ](https://docs.rs/uncollate/latest/uncollate/)
 [![Crates.io Version](https://img.shields.io/crates/v/uncollate?logo=rust)

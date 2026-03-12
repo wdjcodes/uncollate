@@ -2,15 +2,19 @@ use uncollate::Uncollate;
 
 #[derive(Uncollate)]
 pub struct Os {
-    opt: Option<String>
+    opt: Option<String>,
 }
 
 #[test]
 fn uncollate_option_string() {
     let opts = vec![
-        Os { opt: Some("apple".into())},
+        Os {
+            opt: Some("apple".into()),
+        },
         Os { opt: None },
-        Os { opt: Some("banana".into())}
+        Os {
+            opt: Some("banana".into()),
+        },
     ];
 
     let uncol = opts.uncollate();

@@ -2,7 +2,6 @@ use proc_macro::TokenStream;
 use quote::{format_ident, quote};
 use syn::{Data, DeriveInput, Error, parse_macro_input, spanned::Spanned};
 
-
 #[proc_macro_derive(Uncollate)]
 pub fn derive_uncollate(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
@@ -10,12 +9,21 @@ pub fn derive_uncollate(input: TokenStream) -> TokenStream {
     let data = if let Data::Struct(data) = input.data {
         data
     } else {
-        return Error::new(input.span(), "Uncollate can only be derived for structs").into_compile_error().into();
+        return Error::new(input.span(), "Uncollate can only be derived for structs")
+            .into_compile_error()
+            .into();
     };
     let struct_name = &input.ident;
     let uncollated_name = format_ident!("Uncollated{}", struct_name);
-    let field_names: Vec<_> = data.fields.iter().filter_map(|f| f.ident.as_ref()).collect();
-    let get_muts: Vec<_> = field_names.iter().map(|f| format_ident!("{}_mut", f)).collect();
+    let field_names: Vec<_> = data
+        .fields
+        .iter()
+        .filter_map(|f| f.ident.as_ref())
+        .collect();
+    let get_muts: Vec<_> = field_names
+        .iter()
+        .map(|f| format_ident!("{}_mut", f))
+        .collect();
     let field_types: Vec<_> = data.fields.iter().map(|f| &f.ty).collect();
     let uncollated = quote! {
         #[derive(Default)]
@@ -42,5 +50,6 @@ pub fn derive_uncollate(input: TokenStream) -> TokenStream {
     };
     quote! {
         #uncollated
-    }.into()
+    }
+    .into()
 }
