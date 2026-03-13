@@ -2,7 +2,7 @@
 name = "uncollate_macro"
 description = "macro implementation for the uncollate crate"
 edition.workspace = true
-version = "0.2.1"
+version = "0.2.2"
 repository.workspace = true
 authors.workspace = true
 license.workspace = true

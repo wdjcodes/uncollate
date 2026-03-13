@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.3](https://github.com/wdjcodes/uncollate/compare/uncollate-v0.2.2...uncollate-v0.2.3) - 2026-03-13
+
+### Other
+
+- Improve documentation in README.md
+
 ## [0.2.2](https://github.com/wdjcodes/uncollate/compare/uncollate-v0.2.1...uncollate-v0.2.2) - 2026-03-03
 
 ### Added
